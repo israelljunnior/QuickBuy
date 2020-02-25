@@ -1,0 +1,37 @@
+<div class="text-center">
+  <form action="" class="form-signin">
+    <h1 class="h4 mb-2 login">Login</h1>
+
+    <label for="inputEmail" class="sr-only">Email</label>
+    <input type="email" name="email" id="inputEmail" class="form-control mb-2" placeholder="Informe o seu Email"
+      [(ngModel)]="usuario.email" #email="ngModel" email required
+      [ngClass]="{
+        'is-invalid': email.invalid && (email.dirty || email.touched),
+        'is-valid' : email.valid && (email.dirty || email.touched)
+      }" />
+    <div class="invalid-feedback mb-2" *ngIf="email.invalid && (email.dirty || email.touched)">
+      <span *ngIf="email.errors.required">
+        Campo Email é requirido
+      </span>
+      <span *ngIf="email.errors.email">
+        Campo deve preenchido com formato correto
+      </span>
+    </div>
+
+    <label for="inputSenha" class="sr-only">Senha</label>
+    <input type="password" name="senha" id="inputSenha" class="form-control mb-2" placeholder="Informe a sua Senha"
+      [(ngModel)]="usuario.senha" #senha="ngModel" required
+      [ngClass]="{
+        'is-invalid': senha.invalid && (senha.dirty || senha.touched),
+        'is-valid': senha.valid && (senha.dirty || senha.touched)
+      }" />
+    <div class="invalid-feedback mb-2" *ngIf="senha.invalid && (senha.dirty || senha.touched)">
+      <span  *ngIf="senha.errors.required">
+        Campo senha é requirido
+      </span>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block mb-2" (click)="entrar()">Entrar</button>
+  </form>
+  <img src="..\..\assets\img\buy.jpg" alt="" srcset="">
+</div>

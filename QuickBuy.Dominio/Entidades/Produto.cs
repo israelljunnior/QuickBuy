@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace QuickBuy.Dominio.Entidades
@@ -9,7 +10,8 @@ namespace QuickBuy.Dominio.Entidades
         public int Id { get; set; }
         public string Nome{ get; set; }
         public string Descricao { get; set; }
-        public Decimal Preco { get; set; }
+        [DisplayFormat (DataFormatString = "{0:f2}")]
+        public Decimal Preco { get; set; } 
 
         public override void Validate()
         {

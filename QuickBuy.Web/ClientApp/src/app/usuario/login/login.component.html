@@ -31,6 +31,10 @@
       </span>
     </div>
 
+    <div class="alert alert-danger" *ngIf="mensagem">
+      {{mensagem}}
+    </div>
+
     <button type="submit" class="btn btn-primary btn-block mb-2" (click)="entrar()">Entrar</button>
   </form>
   <img src="..\..\assets\img\buy.jpg" alt="" srcset="">

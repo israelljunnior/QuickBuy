@@ -23,8 +23,9 @@ export class NavMenuComponent {
   usuarioLogado(): boolean {
     return this.usuarioService.usuarioAutenticado();
   }
+  
   sair() {
-    sessionStorage.removeItem('usuario_autenticado');
+    this.usuarioService.limparSessao();
     this.router.navigate(['/']);
   }
 }

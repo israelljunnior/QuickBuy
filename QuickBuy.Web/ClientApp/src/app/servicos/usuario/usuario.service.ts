@@ -12,12 +12,13 @@ export class UsuarioService {
   private _usuario: Usuario;
 
   get usuario(): Usuario {
-    this._usuario = JSON.parse(sessionStorage.getItem("usuario-autenticado"));
+    this._usuario = JSON.parse(sessionStorage.getItem("usuario_autenticado"));
     return this._usuario;
   }
 
   set usuario(usuario: Usuario) {
-    sessionStorage.setItem("usuario-autenticado", JSON.stringify(usuario));
+    sessionStorage.setItem("usuario_autenticado", JSON.stringify(usuario));
+    this._usuario = usuario;
   }
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.baseUrl = baseUrl;
@@ -28,7 +29,7 @@ export class UsuarioService {
   }
 
   public limparSessao() {
-    sessionStorage.setItem("usuario-autenticado", "");
+    sessionStorage.setItem("usuario_autenticado", "");
     this._usuario = null;
   }
 

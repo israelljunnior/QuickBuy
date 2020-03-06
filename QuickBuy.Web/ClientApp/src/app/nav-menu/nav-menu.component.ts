@@ -8,7 +8,10 @@ import { UsuarioService } from '../servicos/usuario/usuario.service';
   styleUrls: ['./nav-menu.component.css']
 })
 export class NavMenuComponent {
+
   isExpanded = false;
+  routes = [{name: "Home", path: '/', condition: ''}];
+
 
   constructor(private router: Router, private usuarioService: UsuarioService){}
 

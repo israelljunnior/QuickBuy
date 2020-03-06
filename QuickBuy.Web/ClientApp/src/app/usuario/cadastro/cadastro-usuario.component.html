@@ -1,5 +1,5 @@
 <div class="text-center">
-  <form action="" class="form-signin">
+  <form action="" class="form-signin" #formUsuario>
     <h1 class="h4 mb-2 login">Login</h1>
 
     <label for="inputEmail" class="sr-only">Email</label>
@@ -31,13 +31,43 @@
       </span>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block mb-2" (click)="entrar()" [disabled]="ativar_spinner">
+    <label for="inputNome" class="sr-only">Nome</label>
+    <input type="text" name="nome" id="inputnome" class="form-control mb-2" placeholder="Nome"
+      [(ngModel)]="usuario.nome" #nome="ngModel" required
+      [ngClass]="{
+        'is-invalid': nome.invalid && (nome.dirty || nome.touched),
+        'is-valid' : nome.valid && (nome.dirty || nome.touched)
+      }" />
+    <div class="invalid-feedback mb-2" *ngIf="nome.invalid && (nome.dirty || nome.touched)">
+      <span *ngIf="nome.errors.required">
+        Campo nome é requirido
+      </span>
+      <span *ngIf="nome.errors">
+        Campo deve preenchido com formato correto
+      </span>
+    </div>
+    
+    <label for="inputNome" class="sr-only">Sobre Nome</label>
+    <input type="text" name="sobreNome" id="inputSobreNome" class="form-control mb-2" placeholder="Sobre Nome"
+      [(ngModel)]="usuario.sobreNome" #sobreNome="ngModel" required
+      [ngClass]="{
+        'is-invalid': sobreNome.invalid && (sobreNome.dirty || sobreNome.touched),
+        'is-valid' : sobreNome.valid && (sobreNome.dirty || sobreNome.touched)
+      }" />
+    <div class="invalid-feedback mb-2" *ngIf="sobreNome.invalid && (sobreNome.dirty || sobreNome.touched)">
+      <span *ngIf="sobreNome.errors.required">
+        Campo Sobre Nome é requirido
+      </span>
+      <span *ngIf="sobreNome.errors">
+        Campo deve preenchido com formato correto
+      </span>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block mb-2" (click)="cadastrar()" [disabled]="ativar_spinner || formUsuario.erros">
       <span class="spinner-border spinner-border-sm" arial-hidden="true"
         *ngIf="ativar_spinner"></span>
-      Entrar
+      Cadastrar
     </button>
-
-    <div class="">Novo por aqui? <a [routerLink]='["/cadastro-usuario"]'>Cadastre-se</a></div>
 
     <div class="alert alert-danger" *ngIf="mensagem">
       {{mensagem}}

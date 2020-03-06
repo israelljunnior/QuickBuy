@@ -15,6 +15,9 @@
             <a class="nav-link text-dark" [routerLink]='["/produto"]'>Produtos</a>
           </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!usuarioLogado()">
+            <a class="nav-link text-dark" [routerLink]='["/cadastro-usuario"]'>Cadastrar</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!usuarioLogado()">
             <a class="nav-link text-dark" [routerLink]='["/entrar"]'>Entrar</a>
           </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]'>

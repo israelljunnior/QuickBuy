@@ -12,6 +12,7 @@ import { LoginComponent } from './usuario/login/login.component';
 import { GuardaRotas } from './autorizacao/guarda.rotas';
 import { UsuarioService } from './servicos/usuario/usuario.service';
 import { CadastroUsuarioComponent } from './usuario/cadastro/cadastro-usuario.component';
+import { ProdutoService } from './servicos/produto/produto.service';
 
 @NgModule({
   declarations: [
@@ -28,13 +29,14 @@ import { CadastroUsuarioComponent } from './usuario/cadastro/cadastro-usuario.co
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'produto', component: ProdutoComponent, canActivate: [GuardaRotas] },
+      { path: 'produto', component: ProdutoComponent},
       { path: 'entrar', component: LoginComponent },
       { path: 'cadastro-usuario', component: CadastroUsuarioComponent}
 
     ]),
   ],
-  providers: [UsuarioService],
+  providers: [UsuarioService, ProdutoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+//canActivate: [GuardaRotas] 

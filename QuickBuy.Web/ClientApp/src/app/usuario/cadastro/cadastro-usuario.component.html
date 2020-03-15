@@ -1,21 +1,27 @@
 <div class="text-center">
   <form action="" class="form-signin" #formUsuario>
-    <h1 class="h4 mb-2 login">Login</h1>
+    <h1 class="h4 mb-2 login">Cadastrar</h1>
 
     <label for="inputEmail" class="sr-only">Email</label>
     <input type="email" name="email" id="inputEmail" class="form-control mb-2" placeholder="Informe o seu Email"
       [(ngModel)]="usuario.email" #email="ngModel" email required
       [ngClass]="{
-        'is-invalid': email.invalid && (email.dirty || email.touched),
-        'is-valid' : email.valid && (email.dirty || email.touched)
-      }" />
+        'is-invalid': emailDisponivel == false || (email.invalid && (email.dirty || email.touched)),
+        'is-valid' : emailDisponivel && (email.valid && (email.dirty || email.touched)) 
+      }" (blur)="validarEmail()" />
+      <span class="spinner-border spinner-border-sm mb-2" arial-hidden="true"
+        *ngIf="ativar_spinner_email"></span>
+      
     <div class="invalid-feedback mb-2" *ngIf="email.invalid && (email.dirty || email.touched)">
       <span *ngIf="email.errors.required">
-        Campo Email é requirido
+        Campo Email é requirido;
       </span>
       <span *ngIf="email.errors.email">
-        Campo deve preenchido com formato correto
+        Campo deve preenchido com formato correto;
       </span>
+    </div>
+    <div class="invalid-feedback mb-2" *ngIf="emailDisponivel == false">
+        Email não está disponivel;
     </div>
 
     <label for="inputSenha" class="sr-only">Senha</label>
@@ -42,7 +48,7 @@
       <span *ngIf="nome.errors.required">
         Campo nome é requirido
       </span>
-      <span *ngIf="nome.errors">
+      <span *ngIf="nome.errors.email">
         Campo deve preenchido com formato correto
       </span>
     </div>
@@ -54,6 +60,8 @@
         'is-invalid': sobreNome.invalid && (sobreNome.dirty || sobreNome.touched),
         'is-valid' : sobreNome.valid && (sobreNome.dirty || sobreNome.touched)
       }" />
+      <span class="spinner-border spinner-border-sm" arial-hidden="true"
+        *ngIf="ativar_spinner"></span> 
     <div class="invalid-feedback mb-2" *ngIf="sobreNome.invalid && (sobreNome.dirty || sobreNome.touched)">
       <span *ngIf="sobreNome.errors.required">
         Campo Sobre Nome é requirido
@@ -65,12 +73,15 @@
 
     <button type="submit" class="btn btn-primary btn-block mb-2" (click)="cadastrar()" [disabled]="ativar_spinner || formUsuario.erros">
       <span class="spinner-border spinner-border-sm" arial-hidden="true"
-        *ngIf="ativar_spinner"></span>
+        *ngIf="ativar_spinner_cadastrar"></span>
       Cadastrar
     </button>
 
     <div class="alert alert-danger" *ngIf="mensagem">
       {{mensagem}}
+    </div>
+    <div class="alert alert-sucess" *ngIf="usuarioCadastrado">
+      Usuário cadastrado com sucesso! <a [routerLink]='["/entrar"]' class="alert-link">Clique aqui</a> para entrar com sua conta"
     </div>
   </form>
   <img src="..\..\assets\img\buy.jpg" alt="" srcset="">

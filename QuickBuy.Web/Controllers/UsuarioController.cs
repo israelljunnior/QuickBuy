@@ -31,11 +31,33 @@ namespace QuickBuy.Web.Controllers
                 return BadRequest(ex.ToString()); 
             }
         }
-        [HttpPost]
-        public ActionResult Post()
+        [HttpPost("ValidarEmail")]
+        public ActionResult ValidarEmail([FromBody] string email)
         {
             try
             {
+                var usuarioRetorno = _usuarioRepositorio.Obter(email);
+                if (usuarioRetorno == null)
+                    return Ok(true);
+                return BadRequest("Email está disponível");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Post([FromBody] Usuario usuario)
+        {
+            try
+            {
+                var usuarioCadastrado = _usuarioRepositorio.Obter(usuario.Email);
+                if (usuarioCadastrado != null) 
+                    return BadRequest("Email já cadastrado");
+
+                _usuarioRepositorio.Adicionar(usuario);
+
                 return Ok();
             }
             catch (Exception ex)
